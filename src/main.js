@@ -1,6 +1,9 @@
 import {MongoClient} from "mongodb";
 import express from "express";
+import cors from "cors";
+
 const app = express();
+app.use(cors());
 
 
 async function addrecord(req,res){
