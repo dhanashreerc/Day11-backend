@@ -15,8 +15,7 @@ async function addrecord(req,res){
 
     //from query param
     let inputDoc = {
-       name:req.query.name || "default",
-       age:req.query.age || 0
+       message:req.query.message || "default",
     };//data
     await messageColl.insertOne(inputDoc);//insert data
 
@@ -44,6 +43,6 @@ async function readRecord(req,res){
 
 app.get("/findAll",readRecord);
 
-app.listen(4000,()=>{
+app.listen(3000,()=>{
     console.log("Server connected...")
 })
