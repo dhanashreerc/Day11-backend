@@ -63,7 +63,30 @@ async function addToDo(req,res){
     console.log("Record Added");
 }
 
+async function addUserRecord(req,res){
+    const uri="mongodb://127.0.0.1:27017";//mongo address
+    const client = new MongoClient(uri);//mongoclient
+
+    const db=client.db("myproject");//db
+    const messageColl = db.collection("user");//collection
+
+    //from query param
+   
+    let inputDoc = {
+       username: req.query.username ,
+       password: req.query.password,
+       email: req.query.email,
+       mobile: req.query.mobile,
+    };//data
+    await messageColl.insertOne(inputDoc);//insert data
+
+    await client.close();//close conn
+    res.json({opr:"success"});//send to remote  
+    console.log("Record Added");
+}
+
 app.get("/addtodo",addToDo);
+app.get("/adduser",addUserRecord);
 
 app.listen(4000,()=>{
     console.log("Server connected...")
